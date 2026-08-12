@@ -1,0 +1,8 @@
+name: astrbot_plugin_oneroll
+display_name: OneRoll 骰子
+short_desc: 用 HydroRoll-Team OneRoll 引擎提供安全的 TRPG 掷骰。
+desc: 基于 HydroRoll-Team OneRoll 的轻量 AstrBot 骰子插件，支持表达式、多指令和统计。
+version: 0.1.0
+author: Xero-Team
+repo: https://github.com/Xero-Team/astrbot_plugin_oneroll
+astrbot_version: '>=4.27,<5'

@@ -1,0 +1,187 @@
+{
+  "default_expression": {
+    "description": "无参数时使用的默认表达式",
+    "hint": "例如 1d20；也可以直接在 /roll 后提供表达式",
+    "type": "string",
+    "default": "1d20"
+  },
+  "strict_syntax": {
+    "description": "严格 OneRoll 语法检查",
+    "hint": "开启后不自动把 d20 改写为 1d20；表达式完全交由 OneRoll 原生语法校验",
+    "type": "bool",
+    "default": true
+  },
+  "max_input_length": {
+    "description": "表达式最大 UTF-8 字节数",
+    "hint": "限制用户输入，避免超长表达式占用计算资源",
+    "type": "int",
+    "default": 256,
+    "slider": {
+      "min": 32,
+      "max": 4096,
+      "step": 32
+    }
+  },
+  "max_batch_times": {
+    "description": "统计命令最大投掷次数",
+    "hint": "对应 OneRoll 的 batch_samples 预算",
+    "type": "int",
+    "default": 20,
+    "slider": {
+      "min": 1,
+      "max": 100,
+      "step": 1
+    }
+  },
+  "show_details": {
+    "description": "显示 OneRoll 计算明细",
+    "type": "bool",
+    "default": true
+  },
+  "show_rolls": {
+    "description": "显示每组骰面结果",
+    "type": "bool",
+    "default": true
+  },
+  "max_generated_values": {
+    "description": "OneRoll 最大生成骰值数量",
+    "hint": "更低的值可以进一步限制爆炸骰和重骰的资源消耗",
+    "type": "int",
+    "default": 10000,
+    "slider": {
+      "min": 1,
+      "max": 1000000,
+      "step": 1000
+    }
+  },
+  "max_work_units": {
+    "description": "OneRoll 最大计算工作量",
+    "type": "int",
+    "default": 1000000,
+    "slider": {
+      "min": 100,
+      "max": 50000000,
+      "step": 100000
+    }
+  },
+  "max_output_bytes": {
+    "description": "OneRoll 最大结构化输出字节数",
+    "type": "int",
+    "default": 1048576,
+    "slider": {
+      "min": 1024,
+      "max": 67108864,
+      "step": 1024
+    }
+  },
+  "max_message_length": {
+    "description": "发送到聊天平台的最大消息字符数",
+    "type": "int",
+    "default": 4000,
+    "slider": {
+      "min": 512,
+      "max": 10000,
+      "step": 256
+    }
+  },
+  "messages": {
+    "description": "可编辑的回复文案",
+    "hint": "支持 {expression}、{total}、{details}、{rolls}、{comment}、{max_times}、{count}、{minimum}、{maximum}、{mean} 等占位符",
+    "type": "object",
+    "items": {
+      "help": {
+        "description": "帮助文案",
+        "type": "text",
+        "default": "OneRoll 骰子插件\n\n/roll [表达式]（别名 /r）\n  例如：/r 1d20+5、/r 4d6kh3\n  OneRoll 注释和多指令请使用引号：/r '1d20; 2d6 # encounter'\n\n/roll_stats <次数> <表达式>（别名 /rs）\n  例如：/rs 20 4d6\n\n/roll_help（别名 /rhelp）"
+      },
+      "dependency_error": {
+        "description": "依赖不可用时的提示",
+        "type": "string",
+        "default": "OneRoll 依赖未就绪，请先安装 requirements.txt 后重载插件。"
+      },
+      "roll_error": {
+        "description": "掷骰失败提示",
+        "type": "string",
+        "default": "掷骰失败：表达式无效，或计算超出 OneRoll 的安全限制。"
+      },
+      "batch_range_error": {
+        "description": "统计次数超限提示",
+        "hint": "可用占位符：{max_times}",
+        "type": "string",
+        "default": "投掷次数必须在 1 到 {max_times} 之间。"
+      },
+      "result_header": {
+        "description": "结果标题模板",
+        "hint": "可用占位符：{expression}",
+        "type": "string",
+        "default": "结果：{expression}"
+      },
+      "result_total": {
+        "description": "结果总点数模板",
+        "hint": "可用占位符：{total}",
+        "type": "string",
+        "default": "总点数：{total}"
+      },
+      "result_details": {
+        "description": "结果明细模板",
+        "hint": "可用占位符：{details}",
+        "type": "string",
+        "default": "详情：{details}"
+      },
+      "result_rolls": {
+        "description": "骰面模板",
+        "hint": "可用占位符：{rolls}",
+        "type": "string",
+        "default": "骰面：{rolls}"
+      },
+      "result_comment": {
+        "description": "结果注释模板",
+        "hint": "可用占位符：{comment}",
+        "type": "string",
+        "default": "注释：{comment}"
+      },
+      "program_comment": {
+        "description": "程序注释模板",
+        "hint": "可用占位符：{comment}",
+        "type": "string",
+        "default": "程序注释：{comment}"
+      },
+      "stats_header": {
+        "description": "统计标题模板",
+        "hint": "可用占位符：{expression}",
+        "type": "string",
+        "default": "统计：{expression}"
+      },
+      "stats_count": {
+        "description": "统计次数模板",
+        "hint": "可用占位符：{count}",
+        "type": "string",
+        "default": "投掷次数：{count}"
+      },
+      "stats_minimum": {
+        "description": "统计最小值模板",
+        "hint": "可用占位符：{minimum}",
+        "type": "string",
+        "default": "最小值：{minimum}"
+      },
+      "stats_maximum": {
+        "description": "统计最大值模板",
+        "hint": "可用占位符：{maximum}",
+        "type": "string",
+        "default": "最大值：{maximum}"
+      },
+      "stats_mean": {
+        "description": "统计平均值模板",
+        "hint": "可用占位符：{mean}",
+        "type": "string",
+        "default": "平均值：{mean:.2f}"
+      },
+      "stats_total": {
+        "description": "统计总和模板",
+        "hint": "可用占位符：{total}",
+        "type": "string",
+        "default": "总和：{total}"
+      }
+    }
+  }
+}
